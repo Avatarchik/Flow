@@ -15,17 +15,17 @@ C++, Unity, QML, Javascript<br />
   c) Application flow - what screen do you see first? Where to go from there?<br />
 
 <br />  
-![Alt text](image)
+![Alt text](/Images/Screenshot_2016-03-31-12-06-49.png)
 <br />
 Example of Character screen for Destiny Gear Administrator application.<br />
 
 <br />
-![Alt text](image)
+![Alt text](/Images/Screenshot (3).png)
 <br />
 Example of Inventory screen in Destiny Gear Administrator application.<br />
 
 <br />
-![Alt text](image)
+![Alt text](/Images/Screenshot (1).png)
 <br />
 Example of Vault screen in Destiny Gear Administrator application.<br />
 
