@@ -1,45 +1,57 @@
-# Storyboard
-First lab for CST 238 - GUI programming
-
 ![Alt text](image)
 
 <b>1) Description</b>
-Cross platform application to allow you to manipulate any of your character's inventories in the game Destiny.
+A puzzle game that tests your skills, pitting you against lots of variations of jigsaw puzzles, including 3D and imbalanced grids. Connect the colored endpoints with pipes, and cover the entire board without overlapping pipes! Available on Desktop; iOS and Android to be implemented later on.
 
 <b>2) Technologies:</b><br />
-C++, Unity, QML, Javascript<br />
+C#, Unity<br />
 
-<b>3) Mockup</b><br />
-  a) These can be screenshots of other apps that show what you are trying to explain
-  b) Use descriptive about how images relate to your GUI concept
-  c) Application flow - what screen do you see first? Where to go from there?<br />
-
-<br />  
-![Alt text](/Images/2016-03-31_13.48.04[2].png)
+<b>3) Screenshots</b><br />
+ 
+![Alt text](/Images/Splash Screen.png)
 <br />
-Example of Character screen for Destiny Gear Administrator application.<br />
+Opening Menu for Flow.<br />
 
 <br />
-![Alt text](/Images/Screenshot (3).png)
+![Alt text](/Images/Flow menu.png)
 <br />
-Example of Inventory screen in Destiny Gear Administrator application.<br />
+Levels to choose from in Flow.<br />
 
 <br />
-![Alt text](/Images/Screenshot (1).png)
+![Alt text](/Images/Flow.png)
 <br />
-Example of Vault screen in Destiny Gear Administrator application.<br />
+Standard puzzle in Flow.<br />
+
+<br />
+![Alt text](/Images/Cube Connect.png)
+<br />
+Multi-dimensional puzzle in Flow.<br />
 
 <b>4) Installation:</b><br />
-TBD<br />
+a) Install Unity<br />
+b) Open Project<br />
+c) Build and run.<br />
 
 <b>5) Contributors:</b> <br />
+Current and/or Future
+
 [Matthew Cole](https://github.com/colematthew4)<br />
+[StewartTaylor](https://github.com/StewartTaylor)<br />
+[JacobNeal](https://github.com/jacobneal)<br />
+Mark Shanklin (mark.shanklin@oit.edu)<br />
 
-<i>Bugs and TODO list - What are you working on and what are you trying to fix?</i>
+<b>6) Bugs</b><br />
+Project is unfinished.
 
-<b>6) Credits, Inspiration, Alternatives</b><br />
-Tell me if this is a fork of or otherwise inspired by another project<br />
+<b>7) Credits, Inspiration, Alternatives</b><br />
+Always loved the original version of the game, and even used the concept to get a date for my High School senior prom, so I thought it would be cool to create the actual thing!<br />
 
-<b>7) License</b><br />
-I have literally no clue what to put here.
-<br />
+<b>8) License</b><br />
+The MIT License (MIT)<br />
+Copyright (c) 2016 Matthew Cole<br />
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:<br />
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br />
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.<br />
