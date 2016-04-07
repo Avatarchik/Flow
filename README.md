@@ -1,4 +1,4 @@
-![Alt text](image)
+![Alt text](/Images/Flow Logo.png)
 
 <b>1) Description</b>
 A puzzle game that tests your skills, pitting you against lots of variations of jigsaw puzzles, including 3D and imbalanced grids. Connect the colored endpoints with pipes, and cover the entire board without overlapping pipes! Available on Desktop; iOS and Android to be implemented later on.
@@ -18,7 +18,7 @@ Opening Menu for Flow.<br />
 Levels to choose from in Flow.<br />
 
 <br />
-![Alt text](/Images/Flow.png)
+![Alt text](/Images/flow icon.jpg)
 <br />
 Standard puzzle in Flow.<br />
 
