@@ -38,7 +38,7 @@ Current and/or Future
 [Matthew Cole](https://github.com/colematthew4)<br />
 [StewartTaylor](https://github.com/StewartTaylor)<br />
 [JacobNeal](https://github.com/jacobneal)<br />
-Mark Shanklin (mark.shanklin@oit.edu)<br />
+[Mark Shanklin](https://github.com/masisaries)<br />
 
 <b>6) Bugs</b><br />
 Project is unfinished.
