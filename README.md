@@ -28,8 +28,8 @@ Standard puzzle in Flow.<br />
 Multi-dimensional puzzle in Flow.<br />
 
 <b>4) Installation:</b><br />
-a) Install Unity<br />
-b) Open Project<br />
+a) Clone repo<br />
+b) Open in Unity<br />
 c) Build and run.<br />
 
 <b>5) Contributors:</b> <br />
