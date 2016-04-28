@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/PlayBoard.unity
+- path: Assets/Scenes/5x5 Board.unity
   isLoaded: 1
   isActive: 1
