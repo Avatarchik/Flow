@@ -7,20 +7,25 @@ using System.Collections.Generic;
 
 public class Square : MonoBehaviour
 {
-	private FlowEnd flow;
 	private bool endpoint = false;
+	public Text label;
+	public AudioClip _audio;
+	private AudioSource source;
 
-	public Square(FlowEnd end)
+	public bool GetEndpoint
 	{
-		flow = end;
-		endpoint = true;
+		get { return endpoint; }
+		set { endpoint = value; }
 	}
 
 	// Use this for initialization
-	void Start()
+	void Awake()
 	{
-		if (endpoint)
-			flow.enabled = true;
+		source = gameObject.AddComponent<AudioSource>();
+		source.clip = _audio;
+		
+		source.mute = true;
+		source.playOnAwake = false;
 	}
 
 	// Update is called once per frame

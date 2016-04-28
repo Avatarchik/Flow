@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class Grid_2D : MonoBehaviour
 {
-	public List<List<Square>> grid;
+	public List<GameObject> grid;
 	public int width;
 	private int number_of_flows;
 	
@@ -16,42 +16,41 @@ public class Grid_2D : MonoBehaviour
 											new Color32(200, 200, 50, 255), new Color32(102, 0, 255, 255) };
 
 
-	public void PlaceEnds()
-	{
-		Vector2 coordinates;
-		System.Random rand = new System.Random();
-
-		for (short i = 0; i < number_of_flows; i++)
-		{
-			for (short j = 0; j < 2; j++)
-			{
-				coordinates.x = rand.Next(0, (int)Math.Sqrt(grid.Capacity));
-				coordinates.y = rand.Next(0, (int)Math.Sqrt(grid.Capacity));
-				grid[(int)coordinates.x][(int)coordinates.y].gameObject.AddComponent<FlowEnd>();
-				grid[(int)coordinates.x][(int)coordinates.y].GetComponent<FlowEnd>().FlowEndSetter(possible_colors[i], false);
-			}
-		}
-	}
-
 	public int NumberOfFlows
 	{
 		get { return number_of_flows; }
 	}
+
 
 	// Use this for initialization
 	void Start ()
 	{
 		System.Random rand = new System.Random();
 
-		number_of_flows = (width * width) / rand.Next(width - 3, width + 3);
-		grid = new List<List<Square>>(width * width);
+		number_of_flows = rand.Next((int)(width * 0.8), (int)(width * 1.2));
 
-		PlaceEnds();
-	}
+		Vector2 coordinates;
 
-	// Update is called once per frame
-	void Update ()
-	{
-	
+		for (short i = 0; i < number_of_flows; i++)
+		{
+			for (short j = 0; j < 2; j++)
+			{
+				do
+				{
+					coordinates.x = rand.Next(0, width);
+					coordinates.y = rand.Next(0, width);
+				}
+				while (grid[(int)(coordinates.x + coordinates.y * coordinates.x)].GetComponent<Square>().GetEndpoint == true);
+
+				grid[(int)(coordinates.x + coordinates.y * coordinates.x)].GetComponent<Square>().GetEndpoint = true;
+				grid[(int)(coordinates.x + coordinates.y * coordinates.x)].gameObject.AddComponent<FlowEnd>().FlowEndSetter(possible_colors[i], false);
+
+				if (PlayerPrefs.GetInt("labels") == 1)
+					grid[(int)(coordinates.x + coordinates.y * coordinates.x)].GetComponent<Square>().label.text = ((char)(65 + i)).ToString();
+
+				if (PlayerPrefs.GetInt("sound") == 1)
+					grid[(int)(coordinates.x + coordinates.y * coordinates.x)].GetComponent<Square>().GetComponent<AudioSource>().mute = false;
+			}
+		}
 	}
 }
