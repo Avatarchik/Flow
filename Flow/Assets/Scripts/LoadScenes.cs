@@ -7,29 +7,52 @@ using UnityEditor;
 
 public class LoadScenes : MonoBehaviour {
 	private AudioSource source;
+	private static GameObject instance;
 	private AudioClip clip;
+
 	public void LoadPlayboard()
 	{
 		source = GameObject.Find("OnClick Source").GetComponent<AudioSource>();
 #if UNITY_EDITOR
-		clip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/OnClick.wav");
+		clip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audio/OnClick.wav");
 #endif
 		source.clip = clip;
-		source.Play();
-		if (!source.isPlaying)	//wait for sound to play
-			SceneManager.LoadScene("5x5 Board");
+
+		if (!source.mute)
+		{
+			source.Play();
+			if (instance == null)
+			{
+				instance = source.gameObject;
+				DontDestroyOnLoad(source);
+			}
+			else
+				Destroy(GameObject.Find("OnClick Source"));
+		}
+
+		SceneManager.LoadScene("5x5 Board");
 	}
 
 	public void LoadSplashScreen()
 	{
-		source = GameObject.Find("Back Button").GetComponent<AudioSource>();
+		source = GameObject.Find("OnClick Source").GetComponent<AudioSource>();
 #if UNITY_EDITOR
 		clip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audio/OnClick.wav");
 #endif
 		source.clip = clip;
-		source.Play();
-		if (!source.isPlaying)	//wait for sound to play
-			SceneManager.LoadScene("SplashScreen");
+		if (!source.mute)
+		{
+			source.Play();
+			if (instance == null)
+			{
+				instance = source.gameObject;
+				DontDestroyOnLoad(source);
+			}
+			else
+				Destroy(GameObject.Find("OnClick Source"));
+		}
+
+		SceneManager.LoadScene("SplashScreen");
 	}
 
 	public void LoadOptionsScreen()
@@ -39,9 +62,19 @@ public class LoadScenes : MonoBehaviour {
 		clip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audio/OnClick.wav");
 #endif
 		source.clip = clip;
-		source.Play();
-		if (!source.isPlaying)	//wait for sound to play
-			SceneManager.LoadScene("OptionsScreen");
+		if (!source.mute)
+		{
+			source.Play();
+			if (instance == null)
+			{
+				instance = source.gameObject;
+				DontDestroyOnLoad(source);
+			}
+			else
+				Destroy(GameObject.Find("OnClick Source"));
+		}
+
+		SceneManager.LoadScene("OptionsScreen");
 	}
 
 	public void Quit()
@@ -51,11 +84,29 @@ public class LoadScenes : MonoBehaviour {
 		clip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audio/OnClick.wav");
 #endif
 		source.clip = clip;
-		source.Play();
-		if (!source.isPlaying)  //wait for sound to play
+		if (!source.mute)
 		{
-			PlayerPrefs.Save();
-			Application.Quit();
+			source.Play();
+			if (instance == null)
+			{
+				instance = source.gameObject;
+				DontDestroyOnLoad(source);
+			}
+			else
+				Destroy(GameObject.Find("OnClick Source"));
 		}
+
+		PlayerPrefs.Save();
+		Application.Quit();
+	}
+
+	// Use this for initialization
+	void Start()
+	{
+		source = GameObject.Find("OnClick Source").GetComponent<AudioSource>();
+		if (PlayerPrefs.GetInt("sound") == 1)
+			source.mute = false;
+		else
+			source.mute = true;
 	}
 }

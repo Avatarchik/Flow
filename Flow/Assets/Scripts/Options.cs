@@ -2,8 +2,10 @@
 using UnityEngine.UI;
 
 public class Options : MonoBehaviour {
+	private AudioSource source;
 	public void SetLabels()
 	{
+		source.Play();
 		int label = 0;
 		Text[] txt_objects = GetComponentsInChildren<Text>();
 		for (; txt_objects[label].name != "ColorLabels"; label++) ;
@@ -30,18 +32,16 @@ public class Options : MonoBehaviour {
 		{
 			txt_objects[label].text = "Sound: Off";
 			PlayerPrefs.SetInt("sound", 0);
-			AudioSource[] sources = GetComponentsInChildren<AudioSource>();
-			for (int i = 0; i < sources.Length; i++)
-				sources[i].mute = true;
+			source.mute = true;
 		}
 		else
 		{
 			txt_objects[label].text = "Sound: On";
 			PlayerPrefs.SetInt("sound", 1);
-			AudioSource[] sources = GetComponentsInChildren<AudioSource>();
-			for (int i = 0; i < sources.Length; i++)
-				sources[i].mute = false;
+			source.mute = false;
 		}
+
+		source.Play();
 	}
 
 	void Start()
@@ -60,16 +60,14 @@ public class Options : MonoBehaviour {
 		if (PlayerPrefs.GetInt("sound") == 1)
 		{
 			txt_objects[label].text = "Sound: On";
-			AudioSource[] sources = GetComponentsInChildren<AudioSource>();
-			for (int i = 0; i < sources.Length; i++)
-				sources[i].mute = false;
+			source = GameObject.Find("OnClick Source").GetComponent<AudioSource>();
+			source.mute = false;
 		}
 		else
 		{
 			txt_objects[label].text = "Sound: Off";
-			AudioSource[] sources = GetComponentsInChildren<AudioSource>();
-			for (int i = 0; i < sources.Length; i++)
-				sources[i].mute = true;
+			source = GameObject.Find("OnClick Source").GetComponent<AudioSource>();
+			source.mute = true;
 		}
 	}
 }
