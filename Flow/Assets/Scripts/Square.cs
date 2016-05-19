@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Square : MonoBehaviour
 {
 	private bool endpoint = false;
-	public Text label;
-	public AudioClip _audio;
-	private AudioSource source;
 
 	public bool GetEndpoint
 	{
@@ -14,19 +11,8 @@ public class Square : MonoBehaviour
 		set { endpoint = value; }
 	}
 
-	// Use this for initialization
-	void Awake()
+	void OnMouseOver()
 	{
-		source = gameObject.AddComponent<AudioSource>();
-		source.clip = _audio;
-		
-		source.mute = true;
-		source.playOnAwake = false;
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-
+		Grid_2D.current = this;
 	}
 }
