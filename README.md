@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-![Alt text](/Images/Flow Logo.png)
+![Alt text](/Flow/Assets/Resources/Images/Logo.png)
 
 <b>1) Description:</b><br />
 A puzzle game that tests your skills, pitting you against lots of variations of jigsaw puzzles, including 3D and imbalanced grids. Connect the colored endpoints with pipes, and cover the entire board without overlapping pipes! Available on Desktop; iOS and Android to be implemented later on.
@@ -9,24 +9,19 @@ C#, Unity<br />
 
 <b>3) Screenshots</b><br />
  
-![Alt text](/Images/Splash Screen.png)
+![Alt text](/Flow/Assets/Resources/Images/Splash Screen.png)
 <br />
 Opening Menu for Flow.<br />
 
 <br />
-![Alt text](/Images/Flow menu.png)
+![Alt text](/Flow/Assets/Resources/Images/Levels Screen.png)
 <br />
 Levels to choose from in Flow.<br />
 
 <br />
-![Alt text](/Images/flow icon.jpg)
+![Alt text](/Flow/Assets/Resources/Images/Gameboard.png)
 <br />
 Standard puzzle in Flow.<br />
-
-<br />
-![Alt text](/Images/Cube Connect.png)
-<br />
-Multi-dimensional puzzle in Flow.<br />
 
 <b>4) Installation:</b><br />
 a) Clone repo<br />
@@ -41,8 +36,12 @@ Current and/or Future
 [JacobNeal](https://github.com/jacobneal)<br />
 [Mark Shanklin](https://github.com/masisaries)<br />
 
-<b>6) Bugs</b><br />
-Project is unfinished.
+<b>6) Bugs and Things-To-Do</b><br />
+1) Need to implement the rest of the levels.
+2) In full build, lines on gameboard do not appear.
+3) Some audio issues when changing scenes.
+4) Fix the "Level Completed" GUI so the buttons actually do something.
+5) Add and save player level-completion stats.
 
 <b>7) Credits, Inspiration, Alternatives</b><br />
 Always loved the original version of the game, and even used the concept to get a date for my High School senior prom, so I thought it would be cool to create the actual thing!<br />
@@ -56,6 +55,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br />
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.<br />
-=======
-# Flow
->>>>>>> d688b2171b4db3d692050e7c514b445adc0af750
