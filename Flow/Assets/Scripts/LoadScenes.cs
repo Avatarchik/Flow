@@ -1,9 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
+using System;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class LoadScenes : MonoBehaviour {
 	private AudioSource source;
+	private LevelPath level_path;
 
 	// Use this for initialization
 	void Start()
@@ -11,31 +18,45 @@ public class LoadScenes : MonoBehaviour {
 		source = GameObject.Find("OnClick Source").GetComponent<AudioSource>();
 
 		if (PlayerPrefs.GetInt("sound") == 1)
+		{
 			source.mute = false;
+			source.Play();
+		}
 		else
 			source.mute = true;
+
+		level_path = new LevelPath();
 	}
 
-	public void SetPath(Button path)
+	public LevelPath Path
 	{
-		Grid_2D.Path += path.GetComponentInChildren<Text>().name + "/";
+		get { return level_path; }
 	}
 
-	public void ResetPath()
+	public void SetLevel(Button path)
 	{
-		Grid_2D.Path = "Assets/Resources/Puzzle Setups/";
+		level_path.Level = path.GetComponentInChildren<Text>().name + "/";
+	}
+
+	public void SetSubLevel(Button path)
+	{
+		level_path.SubLevel = path.GetComponentInChildren<Text>().name + "/";
+		ShowCompletedLevels();
 	}
 
 	public void LoadPlayboard(Button level)
 	{
-		Grid_2D.Path += level.name + ".txt";
+		level_path.LevelName = level.name + ".txt";
+		Grid_2D.level_path = level_path;
 		Grid_2D.Width = int.Parse(GameObject.Find("Pack Type").GetComponent<Text>().text[0].ToString());
+		DontDestroyOnLoad(source);
 		SceneManager.LoadScene("Playboard");
 	}
 
 	public void LoadSplashScreen()
 	{
-		ResetPath();
+		Destroy(source.gameObject);
+		level_path.Reset();
 		SceneManager.LoadScene("SplashScreen");
 	}
 
@@ -45,13 +66,43 @@ public class LoadScenes : MonoBehaviour {
 		Application.Quit();
 	}
 
-	public void LoadNextLevel()
+	public void ShowCompletedLevels()
 	{
-		
+		try
+		{
+			StreamReader leveldata = new StreamReader(level_path.CreateLevelDataPath());
+
+			using (leveldata)
+			{
+				string levels_complete = leveldata.ReadToEnd();
+				int level_number = 1;
+
+				foreach (char complete in levels_complete)
+				{
+					if (complete == '1')
+					{
+#if UNITY_EDITOR
+						GameObject _object = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/StarCompleted.prefab"));
+						_object.transform.SetParent(GameObject.Find("Level " + level_number).transform);
+#endif
+					}
+
+					level_number++;
+				}
+
+				leveldata.Close();
+			}
+		}
+		catch (Exception except)
+		{
+			Debug.Log(except);
+		}
 	}
 
-	public void LoadPreviousLevel()
+	public void DeleteCompletedLevelIcons()
 	{
-
+		GameObject[] objects = GameObject.FindGameObjectsWithTag("LevelComplete");
+		foreach (GameObject _object in objects)
+			Destroy(_object);
 	}
 }

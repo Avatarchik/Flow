@@ -9,9 +9,9 @@ public class Grid_2D : MonoBehaviour
 	private AudioSource sound;
 	private List<GameObject> grid;
 	public GameObject win_screen;
-	private static int width = 5;
+	private static int width;// = 5;
 	private int number_of_flows = 0;
-	public static string level_path = "Assets/Resources/Puzzle Setups/Regular/5x5/Level 1.txt";
+	public static LevelPath level_path;// = new LevelPath("Regular/", "5x5/", "Level 1.txt");
 	public List<Line> paths;
 	private Square source;
 	private Square previous;
@@ -23,6 +23,8 @@ public class Grid_2D : MonoBehaviour
 	public static Color32[] possible_colors = new Color32[16] { Color.blue, Color.red, Color.yellow, Color.green, Color.white, new Color32(255, 102, 0, 255), Color.cyan, new Color32(102, 0, 102, 255),
 											new Color32(0, 102, 0, 255), new Color32(0, 0, 102, 255), new Color32(102, 0, 0, 255), Color.grey, Color.magenta, new Color32(0, 102, 153, 255),
 											new Color32(200, 200, 50, 255), new Color32(102, 0, 255, 255) };
+
+	private bool can_add_squares = true;
 
 
 	public int NumberOfFlows
@@ -41,10 +43,9 @@ public class Grid_2D : MonoBehaviour
 		set { width = value; }
 	}
 
-	public static string Path
+	public static LevelPath Path
 	{
 		get { return level_path; }
-		set { level_path = value; }
 	}
 
 	// Use this for initialization
@@ -58,7 +59,7 @@ public class Grid_2D : MonoBehaviour
 		PlaceFlowEnds();
 
 		flow_counter = GameObject.Find("SolvedFlowCounter").GetComponent<Text>();
-		flow_counter.text = "Flows: " + flows_completed.ToString() + '/' + GetComponentInParent<Grid_2D>().NumberOfFlows.ToString();
+		UpdateFlowCounter();
 
 		paths = new List<Line>(number_of_flows);
 
@@ -104,7 +105,7 @@ public class Grid_2D : MonoBehaviour
 		{
 			string line = string.Empty;
 			int x = 0, y = 0;
-			StreamReader reader = new StreamReader(level_path);
+			StreamReader reader = new StreamReader(level_path.Create());
 
 			using (reader)
 			{
@@ -145,53 +146,77 @@ public class Grid_2D : MonoBehaviour
 		if (current.GetComponent<Collider2D>() != null)
 		{
 			bool found = false;
-			int i = 0;
 			source = current;
+			previous = current;
 
-			while (i < number_of_flows && !found)
+			for (int i = 0; i < number_of_flows && !found; i++)
 			{
 				if (paths[i].ConnectedSquares.Contains(current) || paths[i].ConnectedSquares.Contains(current.GetComponent<FlowEnd>().opposite.GetComponent<Square>()))
 				{
 					paths[i].Clear();
+					flows_completed--;
+					UpdateFlowCounter();
 					found = true;
 				}
-
-				i++;
 			}
 
 			if (source.name == current.name)
 			{
 				int index = 0;
-				while (paths[index].Count != 0)
+				while (paths[index].ConnectedSquares.Count != 0)
 					index++;
 
 				paths[index].ConnectedSquares.Add(current);
-				paths[index].Count++;
 			}
 		}
 	}
 
 	void ClickMove()
 	{
-		if (current.GetComponent<Collider2D>() != null)
+		if (current.GetComponent<Collider2D>() != null && can_add_squares)
 		{
-			for (int i = 0; i < number_of_flows; i++)
+			bool found = false;
+
+			for (int i = 0; i < number_of_flows && !found; i++)
 			{
 				if (paths[i].ConnectedSquares.Contains(source) && !paths[i].ConnectedSquares.Contains(current))
 				{
 					if (current.GetComponent<FlowEnd>() == null)
 					{
+						for (int j = 0; j < number_of_flows && !found; j++)
+						{
+							if (paths[j].ConnectedSquares.Contains(current))
+							{
+								paths[j].Clear();
+								flows_completed--;
+								UpdateFlowCounter();
+								found = true;
+							}
+						}
+
 						paths[i].ConnectedSquares.Add(current);
-						paths[i].Count++;
 						paths[i].CreateLine(current, previous);
+						previous = current;
 					}
 					else if (current.GetComponent<FlowEnd>().GetSphere.GetComponent<MeshRenderer>().material.color == source.GetComponent<FlowEnd>().GetSphere.GetComponent<MeshRenderer>().material.color)
 					{
 						paths[i].ConnectedSquares.Add(current);
-						paths[i].Count++;
 						paths[i].CreateLine(current, previous);
+						can_add_squares = false;
 					}
+					else
+						can_add_squares = false;
 				}
+			}
+		}
+		else if (!can_add_squares)
+		{
+			bool found = false;
+
+			for (int i = 0; i < number_of_flows && !found; i++)
+			{
+				if (paths[i].ConnectedSquares.Contains(current) && paths[i].ConnectedSquares.Contains(previous))
+					can_add_squares = true;
 			}
 		}
 	}
@@ -204,6 +229,7 @@ public class Grid_2D : MonoBehaviour
 			{
 				current.GetComponent<FlowEnd>().connected = true;
 				current.GetComponent<FlowEnd>().opposite.gameObject.GetComponent<FlowEnd>().connected = true;
+				flows_completed++;
 				UpdateFlowCounter();
 			}
 			else
@@ -214,20 +240,25 @@ public class Grid_2D : MonoBehaviour
 
 				if (index != paths.Count)
 				{
-					paths[index].ConnectedSquares.RemoveAt(paths[index].Count - 1);
-					paths[index].GetLine.RemoveAt(paths[index].GetLine.Count - 1);
+					try
+					{
+						paths[index].ConnectedSquares.RemoveAt(paths[index].ConnectedSquares.Count - 1);
+						paths[index].GetLine.RemoveAt(paths[index].GetLine.Count - 1);
+					}
+					catch (Exception except)
+					{
+						Debug.Log(except);
+					}
 				}
 			}
-
-			GameObject.Find("OnClick Source").GetComponent<AudioSource>().Play();
 		}
 
+		can_add_squares = true;
 		CheckIfLevelWon();
 	}
 
 	void UpdateFlowCounter()
 	{
-		flows_completed++;
 		flow_counter.text = "Flows: " + flows_completed.ToString() + '/' + number_of_flows.ToString();
 	}
 
@@ -268,9 +299,29 @@ public class Grid_2D : MonoBehaviour
 		{
 			Debug.Log("We won!!");
 
-			
-			win_screen.SetActive(true);
+			try
+			{
+				//write completed level to file
+				StreamWriter newfile = new StreamWriter(level_path.CreateLevelDataPath());
+
+				using (newfile)
+				{
+					char[] complete = { '1' };
+					int level_number = int.Parse(level_path.LevelName[6].ToString());
+					if (char.IsDigit(level_path.LevelName[7]))
+						level_number += int.Parse(level_path.LevelName[7].ToString());
+
+					newfile.Write(complete, level_number, 1);
+					newfile.Close();
+				}
+			}
+			catch (Exception except)
+			{
+				Debug.Log(except);
+			}
+
 			enabled = false;
+			win_screen.SetActive(true);
 		}
 	}
 
@@ -288,7 +339,5 @@ public class Grid_2D : MonoBehaviour
 			sound.Play();
 			Release();
 		}
-
-		previous = current;
 	}
 }

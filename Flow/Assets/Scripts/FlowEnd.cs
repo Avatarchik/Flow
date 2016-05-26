@@ -56,4 +56,10 @@ public class FlowEnd : MonoBehaviour {
 		opposite = sq;
 		sq.GetComponent<FlowEnd>().opposite = gameObject;
 	}
+
+	public void Unconnect()
+	{
+		connected = false;
+		opposite.GetComponent<FlowEnd>().connected = false;
+	}
 }
