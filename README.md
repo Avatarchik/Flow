@@ -1,8 +1,9 @@
-<<<<<<< HEAD
 ![Alt text](/Flow/Assets/Resources/Images/Logo.png)
 
 <b>1) Description:</b><br />
-A puzzle game that tests your skills, pitting you against lots of variations of jigsaw puzzles, including 3D and imbalanced grids. Connect the colored endpoints with pipes, and cover the entire board without overlapping pipes! Available on Desktop; iOS and Android to be implemented later on.
+A puzzle game that tests your skills, pitting you against lots of variations of jigsaw puzzles. Connect the caps with pipes, and cover the entire board without overlapping pipes! Now available on PC!
+
+<i>Please note, this is not an original concept, just a rehash of the popular puzzle game by Big Duck Games LLC</i>
 
 <b>2) Technologies:</b><br />
 C#, Unity<br />
@@ -27,19 +28,18 @@ Standard puzzle in Flow.<br />
 a) Clone repo<br />
 b) Open in Unity<br />
 c) Build and run.<br />
+<b>OR</b><br />
+a) Download the installer by clicking on FlowSetup.exe, then 'View Raw'<br />
+b) Run the installer.<br />
 
 <b>5) Contributors:</b> <br />
 Current and/or Future
 
 [Matthew Cole](https://github.com/colematthew4)<br />
-[StewartTaylor](https://github.com/StewartTaylor)<br />
-[JacobNeal](https://github.com/jacobneal)<br />
 [Mark Shanklin](https://github.com/masisaries)<br />
 
 <b>6) Bugs and Things-To-Do</b><br />
 1) Need to implement the rest of the levels.
-2) The "Level Completed" GUI is not detecting button clicks.
-3) Further test adding and saving player level-completion stats and progress reset.
 
 <b>7) Credits, Inspiration, Alternatives</b><br />
 Always loved the original version of the game, and even used the concept to get a date for my High School senior prom, so I thought it would be cool to create the actual thing!<br />
