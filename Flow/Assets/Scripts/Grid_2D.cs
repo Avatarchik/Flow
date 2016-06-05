@@ -9,9 +9,9 @@ public class Grid_2D : MonoBehaviour
 	private AudioSource sound;
 	private List<GameObject> grid;
 	public GameObject win_screen;
-	private static int width;// = 5;
+	private static int width;
 	private int number_of_flows = 0;
-	public static LevelPath level_path;// = new LevelPath("Regular/", "5x5/", "Level 1.txt");
+	public static LevelPath level_path;
 	public List<Line> paths;
 	private Square source;
 	private Square previous;
@@ -301,17 +301,27 @@ public class Grid_2D : MonoBehaviour
 
 			try
 			{
+				string oldcontents, newcontents;
+
+				StreamReader oldfile = new StreamReader(level_path.CreateLevelDataPath());
+				using (oldfile)
+				{
+					oldcontents = oldfile.ReadToEnd();
+					oldfile.Close();
+				}
+
 				//write completed level to file
 				StreamWriter newfile = new StreamWriter(level_path.CreateLevelDataPath());
 
 				using (newfile)
 				{
-					char[] complete = { '1' };
 					int level_number = int.Parse(level_path.LevelName[6].ToString());
 					if (char.IsDigit(level_path.LevelName[7]))
 						level_number += int.Parse(level_path.LevelName[7].ToString());
 
-					newfile.Write(complete, level_number, 1);
+					newcontents = oldcontents.Substring(0, level_number - 1) + "1" + oldcontents.Substring(level_number);
+
+					newfile.Write(newcontents);
 					newfile.Close();
 				}
 			}
@@ -320,8 +330,8 @@ public class Grid_2D : MonoBehaviour
 				Debug.Log(except);
 			}
 
-			enabled = false;
 			win_screen.SetActive(true);
+			enabled = false;
 		}
 	}
 

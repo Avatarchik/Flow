@@ -84,6 +84,10 @@ public class LoadScenes : MonoBehaviour {
 #if UNITY_EDITOR
 						GameObject _object = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/StarCompleted.prefab"));
 						_object.transform.SetParent(GameObject.Find("Level " + level_number).transform);
+						_object.transform.localScale = Vector3.one;
+						_object.transform.localPosition = Vector3.zero;
+						_object.tag = "LevelComplete";
+						_object.transform.SetAsFirstSibling();
 #endif
 					}
 
