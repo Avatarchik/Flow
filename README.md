@@ -38,10 +38,8 @@ Current and/or Future
 
 <b>6) Bugs and Things-To-Do</b><br />
 1) Need to implement the rest of the levels.
-2) In full build, lines on gameboard do not appear.
-3) Some audio issues when changing scenes.
-4) Fix the "Level Completed" GUI so the buttons actually do something.
-5) Add and save player level-completion stats.
+2) The "Level Completed" GUI is not detecting button clicks.
+3) Further test adding and saving player level-completion stats and progress reset.
 
 <b>7) Credits, Inspiration, Alternatives</b><br />
 Always loved the original version of the game, and even used the concept to get a date for my High School senior prom, so I thought it would be cool to create the actual thing!<br />
